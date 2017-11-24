@@ -6,19 +6,16 @@ public class Strategy {
     private final int maxLength;
     private final double dictionaryLikeness;
     private final double contextLikeness;
-    private final boolean stopOnFirstFailure;
     private final boolean validateRepeatPassword;
     private final boolean validateContext;
 
     public Strategy(int minLength, int maxLength,
                     double dictionaryLikeness, double contextLikeness,
-                    boolean stopOnFirstFailure, boolean validateRepeatPassword,
-                    boolean validateContext) {
+                    boolean validateRepeatPassword, boolean validateContext) {
         this.minLength = minLength;
         this.maxLength = maxLength;
         this.dictionaryLikeness = dictionaryLikeness;
         this.contextLikeness = contextLikeness;
-        this.stopOnFirstFailure = stopOnFirstFailure;
         this.validateRepeatPassword = validateRepeatPassword;
         this.validateContext = validateContext;
     }
@@ -39,7 +36,11 @@ public class Strategy {
         return contextLikeness;
     }
 
-    public boolean isStopOnFirstFailure() {
-        return stopOnFirstFailure;
+    public boolean isValidateRepeatPassword() {
+        return validateRepeatPassword;
+    }
+
+    public boolean isValidateContext() {
+        return validateContext;
     }
 }

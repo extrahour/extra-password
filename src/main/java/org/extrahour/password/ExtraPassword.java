@@ -19,10 +19,11 @@ public class ExtraPassword {
         return validate(password, repeatPassword, null);
     }
 
-    public Set<Error> validate(String password, String repeatPassword, String[] context) {
+    public Set<Error> validate(String password, String repeat, String[] context) {
         Set<Error> errors = new HashSet<>();
         errors.add(validatePasswordTooShort(password));
         errors.add(validatePasswordTooLong(password));
+        errors.add(validateRepeatPassword(password, repeat));
 
         errors.remove(null);
         return errors;
@@ -30,15 +31,25 @@ public class ExtraPassword {
 
     private Error validatePasswordTooShort(String password) {
         if (password == null || password.length() < strategy.getMinLength()) {
-            return Error.VALUE_TOO_SHORT;
+            return Error.TOO_SHORT;
         }
         return null;
     }
 
     private Error validatePasswordTooLong(String password) {
         if (password != null && password.length() > strategy.getMaxLength()) {
-            return Error.VALUE_TOO_LONG;
+            return Error.TOO_LONG;
         }
         return null;
+    }
+
+    private Error validateRepeatPassword(String password, String repeat) {
+        if (!strategy.isValidateRepeatPassword()) {
+            return null;
+        }
+        if (password == null || repeat == null) {
+            return Error.REPEAT_DOES_NOT_MATCH;
+        }
+        return password.equals(repeat) ? null : Error.REPEAT_DOES_NOT_MATCH;
     }
 }

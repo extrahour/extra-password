@@ -2,7 +2,8 @@ package org.extrahour.password;
 
 public enum Error {
 
-    VALUE_TOO_SHORT,
-    VALUE_TOO_LONG
+    TOO_SHORT,
+    TOO_LONG,
+    REPEAT_DOES_NOT_MATCH
 
 }

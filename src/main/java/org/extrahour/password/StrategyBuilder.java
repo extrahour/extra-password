@@ -3,11 +3,10 @@ package org.extrahour.password;
 public class StrategyBuilder {
     private int minLength = 6;
     private int maxLength = Integer.MAX_VALUE;
-    private double dictionaryLikeness;
-    private double contextLikeness;
-    private boolean stopOnFirstFailure;
-    private boolean validateRepeatPassword;
-    private boolean validateContext;
+    private double dictionaryLikeness = 0.8;
+    private double contextLikeness = 0.8;
+    private boolean validateRepeatPassword = true;
+    private boolean validateContext = true;
 
     public StrategyBuilder setMinLength(int minLength) {
         this.minLength = minLength;
@@ -29,11 +28,6 @@ public class StrategyBuilder {
         return this;
     }
 
-    public StrategyBuilder setStopOnFirstFailure(boolean stopOnFirstFailure) {
-        this.stopOnFirstFailure = stopOnFirstFailure;
-        return this;
-    }
-
     public StrategyBuilder setValidateRepeatPassword(boolean validateRepeatPassword) {
         this.validateRepeatPassword = validateRepeatPassword;
         return this;
@@ -45,6 +39,6 @@ public class StrategyBuilder {
     }
 
     public Strategy createStrategy() {
-        return new Strategy(minLength, maxLength, dictionaryLikeness, contextLikeness, stopOnFirstFailure, validateRepeatPassword, validateContext);
+        return new Strategy(minLength, maxLength, dictionaryLikeness, contextLikeness, validateRepeatPassword, validateContext);
     }
 }
